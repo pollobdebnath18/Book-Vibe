@@ -1,5 +1,6 @@
-import React from "react";
+import React, { use, useContext } from "react";
 import { useLoaderData, useParams } from "react-router";
+import { BookContext } from "../../../context/BookProvider";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -8,7 +9,7 @@ const BookDetails = () => {
   // console.log(typeof id, typeof books);
   const expectedBook = books.find((book) => book.bookId == id);
   const {
-    bookId,
+    // bookId,
     bookName,
     author,
     image,
@@ -20,7 +21,13 @@ const BookDetails = () => {
     publisher,
     yearOfPublishing,
   } = expectedBook;
-  console.log(expectedBook);
+  // console.log(expectedBook);
+
+  const {handleRead} = useContext(BookContext);
+  const {handleWishlist} = use(BookContext);
+  // console.log(handleRead);
+
+ 
   return (
     <div className="max-w-[1100px] mx-auto gap-5 grid grid-cols-2  bg-base-100 shadow-sm mt-10 mb-10">
       <div className="flex justify-center items-center bg-gray-200 rounded-2xl">
@@ -57,8 +64,13 @@ const BookDetails = () => {
             <span>rating</span> <span>{rating}</span>
           </div>
           <div className="pt-3 flex gap-4">
-            <button className="btn btn-soft">Read</button>
-            <button className="btn bg-[#50B1C9] text-white">Wishlist</button>
+            <button
+              onClick={() => handleRead(expectedBook)}
+              className="btn btn-soft"
+            >
+              Read
+            </button>
+            <button onClick={()=>handleWishlist(expectedBook)} className="btn bg-[#50B1C9] text-white">Wishlist</button>
           </div>
         </div>
       </div>

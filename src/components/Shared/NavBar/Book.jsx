@@ -1,9 +1,11 @@
-import React from "react";
+import React, {  } from "react";
 import { FaRegStar } from "react-icons/fa";
 import { FcRating } from "react-icons/fc";
 import { Link } from "react-router";
+import { BookContext } from "../../../context/BookProvider";
 
 const Book = ({ book }) => {
+  
 //   console.log(book);
   const {bookId, author, bookName, image, category, tags,rating } = book;
   return (
